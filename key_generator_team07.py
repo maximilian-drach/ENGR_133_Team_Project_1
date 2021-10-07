@@ -1,3 +1,4 @@
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -5,7 +6,7 @@ def key_generator(img_row, img_col, key_str):
     key_str = key_str.replace(' ', '')
     len_key_str = len(key_str)
     
-    key_array = [[0]*img_col]*img_row
+    key_array = np.zeros([img_row], [img_col], dtype=np.uint8)
     
     for row in range(img_row):
         for col in range(img_col):
@@ -15,8 +16,13 @@ def key_generator(img_row, img_col, key_str):
 
     return Key
 
+
+
 def XOR_Cypher(Img, Key):
+    Img = plt.imread(Img)[:,:,:3]
+    img_copy = np.copy(Img)
     row, col = Key.shape
+
     for row in range(row):
         for col in range(col):
             Key[row][col] = bin(Key[row][col])

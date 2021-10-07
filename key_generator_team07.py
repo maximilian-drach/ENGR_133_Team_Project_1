@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -6,7 +5,7 @@ def key_generator(img_row, img_col, key_str):
     key_str = key_str.replace(' ', '')
     len_key_str = len(key_str)
     
-    key_array = np.zeros([img_row], [img_col], dtype=np.uint8)
+    key_array = np.zeros([img_row, img_col], dtype=np.uint8)
     
     for row in range(img_row):
         for col in range(img_col):
@@ -21,12 +20,28 @@ def key_generator(img_row, img_col, key_str):
 def XOR_Cypher(Img, Key):
     Img = plt.imread(Img)[:,:,:3]
     img_copy = np.copy(Img)
-    row, col = Key.shape
+    row, col = Key.shape[0], Key.shape[1]
 
-    for row in range(row):
-        for col in range(col):
-            Key[row][col] = bin(Key[row][col])
-            Img[row][col] = bin(Img[row][col])
-            Img[row][col] = Key[row][col] ^ Img[row][col]
+    for r in range(row):
+        for c in range(col):
+            #Key[row][col] = bin(Key[row][col])
+            #Img[row][col] = bin(Img[row][col])
+            Img[r][c] = Key[r][c] ^ Img[r][c]
     
     return Img
+
+def main():
+    phrase = 'COME AND GET YOUR LOVE'
+    image = 'Pale_Blue_Dot_Encrypted.tiff'
+
+    img = plt.imread(image)[:,:,:3]
+    row = img.shape[0]
+    column = img.shape[1]
+
+    key = key_generator(row, column, phrase)
+    pic = XOR_Cypher(image, key)
+    plt.imsave("text.jpg", pic)
+
+
+if __name__ == '__main__':
+    main()

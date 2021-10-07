@@ -15,8 +15,6 @@ def key_generator(img_row, img_col, key_str):
 
     return Key
 
-
-
 def XOR_Cypher(Img, Key):
     Img = plt.imread(Img)[:,:,:3]
     img_copy = np.copy(Img)

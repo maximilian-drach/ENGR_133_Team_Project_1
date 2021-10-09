@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from numpy.lib.type_check import imag
 
 def key_generator(img_row, img_col, key_str):
     key_str = key_str.replace(' ', '')
@@ -17,6 +18,8 @@ def key_generator(img_row, img_col, key_str):
 
 def XOR_Cypher(Img, Key):
     Img = plt.imread(Img)[:,:,:3]
+   # new_image = np.bitwise_xor(Img, Key)
+   # return new_image
     img_copy = np.copy(Img)
     row, col = Key.shape[0], Key.shape[1]
 

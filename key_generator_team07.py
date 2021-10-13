@@ -36,6 +36,11 @@ def main():
     image = 'Pale_Blue_Dot_Encrypted.tiff'
 
     img = plt.imread(image)[:,:,:3]
+    info = np.iinfo(img.dtype)
+    if img.dtype == np.uint8:
+        print("works")
+
+
     row = img.shape[0]
     column = img.shape[1]
 

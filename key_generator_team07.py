@@ -41,7 +41,7 @@ def main():
 
     key = key_generator(row, column, phrase)
     pic = XOR_Cypher(image, key)
-    plt.imsave("text.tiff", pic)
+    plt.imsave("image.tiff", pic)
 
 
 if __name__ == '__main__':

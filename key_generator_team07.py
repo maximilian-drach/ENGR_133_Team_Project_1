@@ -33,7 +33,7 @@ def XOR_Cypher(Img, Key):
 
 def main():
     phrase = 'COME AND GET YOUR LOVE'
-    image = 'Pale_Blue_Dot_Encrypted.tiff'
+    image = 'img_cipher0.tiff'
 
     img = plt.imread(image)[:,:,:3]
     info = np.iinfo(img.dtype)

@@ -28,4 +28,4 @@ def uint8_float64(img):
 
 image = plt.imread('image.tiff')[:,:,:3]
 image = gray(image)
-plt.imshow(image)
+plt.imsave('gray.tiff', image)

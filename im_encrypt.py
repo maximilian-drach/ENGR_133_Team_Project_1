@@ -1,5 +1,5 @@
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
 image = plt.imread('image.tiff')[:,:,:3]
 # plt.imshow(image)
@@ -7,7 +7,10 @@ grey=[]
 g_row=[]
 for row in image:
     for pixel in row:
-        g_row.append(.2126*pixel[0] + .7152*pixel[1] + .0722*pixel[2])
+        g_pix=[.2126*pixel[0],.7152*pixel[1],.0722*pixel[2]]
+    grey.append(g_row)
+    g_row=[]
+plt.imshow(grey)
 
 
 

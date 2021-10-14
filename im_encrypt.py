@@ -10,6 +10,7 @@ for row in image:
         g_pix=[.2126*pixel[0],.7152*pixel[1],.0722*pixel[2]]
     grey.append(g_row)
     g_row=[]
+
 plt.imshow(grey)
 
 

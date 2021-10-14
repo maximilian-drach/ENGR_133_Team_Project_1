@@ -20,8 +20,8 @@ def XOR_Cypher(Img, Key):
     Img = plt.imread(Img)[:,:,:3]
    # new_image = np.bitwise_xor(Img, Key)
    # return new_image
-    img_copy = np.copy(Img)
-    row, col = Key.shape[0], Key.shape[1]
+   # img_copy = np.copy(Img)
+    row, col = Img.shape[0], Img.shape[1]
 
     for r in range(row):
         for c in range(col):
@@ -37,9 +37,12 @@ def main():
 
     img = plt.imread(image)[:,:,:3]
     info = np.iinfo(img.dtype)
-    if img.dtype == np.uint8:
-        print("works")
-
+    if img.dtype == np.float64:
+        #info = np.iinfo(img.dtype) 
+        #img = img.astype(np.float64)/info.max
+        img = 255*img
+        img = img.astype(np.uint8)
+    
 
     row = img.shape[0]
     column = img.shape[1]

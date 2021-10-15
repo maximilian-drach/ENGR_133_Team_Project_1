@@ -12,9 +12,18 @@ def grey(image):
 
 
 def earth_finder(grey_image):
-    grey
+    #gets the brighest spot on the image
+    brightest_spot = np.amax(grey_image)
+    #finds the index whete the maximum value is
+    index_max = np.where(grey_image == brightest_spot)
+    #takes where first items of each list return, the turns the tupple to a list
+    cordinates = list(zip(index_max[0], index_max[1]))
+    #since all rgb values are the same, we only need the first item of the list
+    return cordinates[0]
+    
 
-
+def earth_image(grey_image, location):
+    earth = np.
 
 def float64_uint8(img):
     #gets the max number the data could be
@@ -37,4 +46,6 @@ def uint8_float64(img):
 
 image = plt.imread('image.tiff')[:,:,:3]
 image = grey(image)
-plt.imsave('gray.tiff', image)
+earth_location = earth_finder(image)
+
+#plt.imsave('gray.tiff', image)

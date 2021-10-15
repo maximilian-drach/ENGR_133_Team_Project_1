@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy 
 
 def grey(image):
 
@@ -29,8 +30,10 @@ def earth_image(grey_image, location):
     return earth
 
 def image_smoother(image):
+    blurred1 = scipy.ndimage.gaussian_filter(image, sigma=3)
+    blurred2 = scipy.ndimage.gaussian_filter(image, sigma=5)
     
-
+    
 def float64_uint8(img):
     #gets the max number the data could be
     img_data_max = np.iinfo(img.dtype).max

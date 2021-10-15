@@ -25,15 +25,11 @@ def earth_finder(grey_image):
 def earth_image(grey_image, location):
     #it take the location and get the row-50 to row+50 and the same for the column with the color values the same
     earth = grey_image[location[0]-50:location[0]+51, location[1]-50:location[1]+51,:]
-    #earth =  np.zeros([101, 101, 3], dtype=np.uint8)
-    # for row in range(location[0]-50,location[0]+5,1):
-    #     for col in range(location[1]-50, location[1]+50,1):
-    #         for i in range(3):
-    #             grey_image[row, col, i] = earth[row-(location[0]-50), col-(location[1]-50), i]
-    
+
     return earth
 
-
+def image_smoother(image):
+    
 
 def float64_uint8(img):
     #gets the max number the data could be
@@ -56,9 +52,13 @@ def uint8_float64(img):
 
 image = plt.imread('image.tiff')[:,:,:3]
 image = grey(image)
-earth_location = earth_finder(image)
-print(earth_location[0])
-earth = earth_image(image, earth_location)
 
-plt.imsave('earth.tiff', earth)
+
+earth_location = earth_finder(image)
+print(earth_location)
+
+
+earth = earth_image(image, earth_location)
+plt.show('earth.tiff', earth)
+
 #plt.imsave('gray.tiff', image)

@@ -16,8 +16,10 @@ def histogram(image):
     plt.hist(image[:,:,1].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='green', alpha=.5, label='Green Pixels')
     plt.hist(image[:,:,2].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='blue', alpha=.5, label='Blue Pixels')
     plt.legend()
+    
+    return plt.legend
  
-
+histogram(image)   
 
 def new_key(phrase):
     

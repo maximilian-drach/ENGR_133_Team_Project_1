@@ -68,6 +68,15 @@ def better_key(image, phrase):
 
 
 def test():
+    image = input('Enter your image: ')
+    out_image = input('Enter your output image file (as a .tiff): ')
+    encrypt = bool(input('Is this an image encryption? enter(True or False): '))
+    if encrypt == True:
+        phrase = input('Enter your encryption phrase: ')
+    else:
+        phrase = input('Enter your decryption phrase: '))
+    
+    
     imag = plt.imread('Pale_Blue_Dot_Encrypted.tiff')[:,:,:3]
     histogram(imag)
     

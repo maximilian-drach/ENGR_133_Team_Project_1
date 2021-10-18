@@ -62,21 +62,27 @@ def uint8_float64(img):
     return img
 
 
-
-image = plt.imread('image.tiff')[:,:,:3]
-#image = plt.imread('img_plain0.tiff')[:,:,:3]
-image = grey(image)
-plt.imsave('gray.tiff', image)
-
-image2 = uint8_float64(image)
-image2 = image_smoother(image2)
-image2 = float64_uint8(image2)
-image_grey = grey(image2)
-plt.imsave('grey_sharpned.tiff', image_grey)
+def test():
+    image = plt.imread('image.tiff')[:,:,:3]
+    #image = plt.imread('img_plain0.tiff')[:,:,:3]
+    image = grey(image)
+    plt.imsave('gray.tiff', image)
+    
+    image2 = uint8_float64(image)
+    image2 = image_smoother(image2)
+    image2 = float64_uint8(image2)
+    image_grey = grey(image2)
+    plt.imsave('grey_sharpned.tiff', image_grey)
+     
+    earth_location = earth_finder(image_grey)
+    # print(earth_location)
+    
+    earth = earth_image(image, earth_location)
+    plt.imsave('earth.tiff', earth)
  
-earth_location = earth_finder(image_grey)
-# print(earth_location)
+def main():
+    pass
 
-earth = earth_image(image, earth_location)
-plt.imsave('earth.tiff', earth)
+if __name__ == '__main__':
+    main()
 

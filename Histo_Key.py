@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import key_generator_team07 as kg
 
-image=plt.imread('Pale_Blue_Dot_Encrypted.tiff')[:,:,:3]
 def histogram(image):
     image=(image*255).astype(np.uint8)
     
@@ -14,8 +13,7 @@ def histogram(image):
     plt.legend()
     
     return plt.legend
- 
-histogram(image)   
+  
 
 def better_key(image, phrase):
     phrase = phrase.replace(' ', '')
@@ -64,30 +62,31 @@ def better_key(image, phrase):
             
     
     
-    
-    
-    
 #image = plt.imread('Pale_Blue_Dot_Encrypted.tiff')[:,:,:3]
 #key = kg.key_generator(image, 'COME AND GET YOUR LOVE')
 #pic = kg.XOR_Cypher(img, key)
 
 
-image = 'image.tiff'
+def test():
+    imag = plt.imread('Pale_Blue_Dot_Encrypted.tiff')[:,:,:3]
+    histogram(imag)
+    
+    
+    image = 'image.tiff'
+    nKey = better_key(image, 'Test')
+    pic = kg.XOR_Cypher(image, nKey)
+    plt.imsave('encypt.tiff', pic)
+    
+    
 
-nKey = better_key(image, 'Test')
-pic = kg.XOR_Cypher(image, nKey)
+    encrypted = 'encypt.tiff'
+    nKey = better_key(encrypted, 'Test')
+    image2 = kg.XOR_Cypher(encrypted, nKey)
+    plt.imsave('orgin.tiff', image2)
+    
+def main():
+    pass
 
-plt.imsave('encypt.tiff', pic)
-
-
-
-
-
-encrypted = 'encypt.tiff'
-
-nKey = better_key(encrypted, 'Test')
-image2 = kg.XOR_Cypher(encrypted, nKey)
-
-plt.imsave('orgin.tiff', image2)
-
+if __name__ == '__main__':
+    main()
     

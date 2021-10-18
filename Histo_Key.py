@@ -2,14 +2,14 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import key_generator_team07 as kg
+import key_generator as kg
 
 def histogram(image):
     image=(image*255).astype(np.uint8)
     
-    plt.hist(image[:,:,0].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='red', alpha=.5, label='Red Pixels')
-    plt.hist(image[:,:,1].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='green', alpha=.5, label='Green Pixels')
-    plt.hist(image[:,:,2].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='blue', alpha=.5, label='Blue Pixels')
+    plt.hist(image[:,:,0].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='red', alpha=.1, label='Red Pixels')
+    plt.hist(image[:,:,1].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='green', alpha=.1, label='Green Pixels')
+    plt.hist(image[:,:,2].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='blue', alpha=.1, label='Blue Pixels')
     plt.legend()
     
     return plt.legend
@@ -44,22 +44,26 @@ def better_key(image, phrase):
 
 # def seed_func(si, s0):
     
-# def use_key(image, phrase):
-#     phrase = phrase.replace(' ', '')
-#     len_phrase = len(phrase)
+def use_key(image, phrase):
+    phrase = phrase.replace(' ', '')
+    len_phrase = len(phrase)
     
-#     seed = len_phrase
+    seed = len_phrase*12345
     
-#     img = plt.imread(image)[:,:,:3]
-#     row = img.shape[0]
-#     col = img.shape[1]
+    img = plt.imread(image)[:,:,:3]
+    row = img.shape[0]
+    col = img.shape[1]
     
     
-#     key = np.zeros([row,col], dtype=np.uint8)
+    key = np.zeros([row,col], dtype=np.uint8)
+    num = seed
     
-#     for r in range(row):
-#         for c in range(col):
+    for r in range(row):
+        for c in range(col):
+            num = ((1103515245*num) + seed)%(2**31)
+            key[r][c] = num
             
+    return key
     
     
 #image = plt.imread('Pale_Blue_Dot_Encrypted.tiff')[:,:,:3]
@@ -68,24 +72,28 @@ def better_key(image, phrase):
 
 
 def test():
-    image = input('Enter your image: ')
-    out_image = input('Enter your output image file (as a .tiff): ')
-    encrypt = bool(input('Is this an image encryption? enter(True or False): '))
-    if encrypt == True:
-        phrase = input('Enter your encryption phrase: ')
-    else:
-        phrase = input('Enter your decryption phrase: '))
+    # image = input('Enter your image: ')
+    # out_image = input('Enter your output image file (as a .tiff): ')
+    # encrypt = bool(input('Is this an image encryption? enter(True or False): '))
+    # if encrypt == True:
+    #     phrase = input('Enter your encryption phrase: ')
+    # else:
+    #     phrase = input('Enter your decryption phrase: '))
     
     
-    imag = plt.imread('Pale_Blue_Dot_Encrypted.tiff')[:,:,:3]
-    histogram(imag)
+    #imag = plt.imread('Pale_Blue_Dot_Encrypted.tiff')[:,:,:3]
+    #histogram(imag)
     
     
     image = 'image.tiff'
+    img = plt.imread('image.tiff')[:,:,:3]
+    #histogram(img)
     nKey = better_key(image, 'Test')
+    nKey = use_key(image, 'Test')
     pic = kg.XOR_Cypher(image, nKey)
     plt.imsave('encypt.tiff', pic)
-    
+    pic = plt.imread('encypt.tiff')[:,:,:3]
+    histogram(pic)
     
 
     encrypted = 'encypt.tiff'
@@ -94,7 +102,9 @@ def test():
     plt.imsave('orgin.tiff', image2)
     
 def main():
-    pass
+    
+    test()
+    #pass
 
 if __name__ == '__main__':
     main()

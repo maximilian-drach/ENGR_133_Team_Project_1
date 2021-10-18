@@ -85,21 +85,21 @@ def test():
     #histogram(imag)
     
     
+    #image = 'try_this_image.tiff'
     image = 'image.tiff'
-    img = plt.imread('image.tiff')[:,:,:3]
-    #histogram(img)
     nKey = better_key(image, 'Test')
-    nKey = use_key(image, 'Test')
+    #nKey = use_key(image, 'Test')
     pic = kg.XOR_Cypher(image, nKey)
     plt.imsave('encypt.tiff', pic)
     pic = plt.imread('encypt.tiff')[:,:,:3]
-    histogram(pic)
+    #histogram(pic)
     
 
     encrypted = 'encypt.tiff'
     nKey = better_key(encrypted, 'Test')
     image2 = kg.XOR_Cypher(encrypted, nKey)
     plt.imsave('orgin.tiff', image2)
+    histogram(image2)
     
 def main():
     

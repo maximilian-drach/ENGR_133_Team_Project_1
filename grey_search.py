@@ -35,6 +35,7 @@ def earth_image(grey_image, location):
     return earth
 
 def image_smoother(image):
+    #using the guassian filter,  blurred the image
     blurred1 = scipy.ndimage.gaussian_filter(image, sigma=2.5)
     
     sx = scipy.ndimage.sobel(blurred1, axis=0, output=None, mode ='constant', cval=0.0)

@@ -101,7 +101,7 @@ def test():
     nKey = use_key(encrypted, 'Test')
     image2 = kg.XOR_Cypher(encrypted, nKey)
     plt.imsave('orgin.tiff', image2)
-    histogram(image2)
+    #histogram(image2)
     
 def main():
     

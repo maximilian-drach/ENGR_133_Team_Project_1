@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import key_generator as kg
 
 def histogram(image):
+    
     image=(image*255).astype(np.uint8)
 
     
@@ -13,7 +14,9 @@ def histogram(image):
     plt.hist(image[:,:,2].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='blue', alpha=.1, label='Blue Pixels')
     plt.legend()
     
-    return plt.leged
+    return plt.legend
+   
+    
     
  
 
@@ -87,9 +90,10 @@ def test():
     #nKey = better_key(image, 'Test')
     nKey = use_key(image, 'Test')
     pic = kg.XOR_Cypher(image, nKey)
-    plt.imsave('encypt.tiff', pic)
-    pic = plt.imread('encypt.tiff')[:,:,:3]
+    plt.imsave('encrypt.tiff', pic)
+    pic = plt.imread('encrypt.tiff')[:,:,:3]
     histogram(pic)
+
     
 
     encrypted = 'encypt.tiff'

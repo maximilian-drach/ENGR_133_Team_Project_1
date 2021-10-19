@@ -96,7 +96,7 @@ def test():
 
     
 
-    encrypted = 'encypt.tiff'
+    encrypted = 'encrypt.tiff'
     #nKey = better_key(encrypted, 'Test')
     nKey = use_key(encrypted, 'Test')
     image2 = kg.XOR_Cypher(encrypted, nKey)

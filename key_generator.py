@@ -8,7 +8,7 @@ def key_generator(img, key_str):
     key_str = key_str.replace(' ', '')
     len_key_str = len(key_str)
     
-    img = ia.image_test(img) #plt.imread(img)[:,:,:3]
+    img = ia.image_tester(img) #plt.imread(img)[:,:,:3]
     #gets the dimensions of the image
     row = img.shape[0]
     col = img.shape[1]
@@ -27,7 +27,7 @@ def key_generator(img, key_str):
 
 def XOR_Cypher(Img, Key):
     #reads the image
-    Img = ia.image_test(Img) #plt.imread(Img)[:,:,:3]
+    Img = ia.image_tester(Img) #plt.imread(Img)[:,:,:3]
 
     
     #is a quicker way to encrypt the iage

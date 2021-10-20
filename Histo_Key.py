@@ -55,19 +55,23 @@ def pseudo_number_key(image, phrase):
     phrase = phrase.replace(' ', '')
     len_phrase = len(phrase)
     
+    #creates the seed, by the length of the phrase
     seed = len_phrase*12345
     
+    #loads the image dim
     img = ia.image_tester(image)
     row = img.shape[0]
     col = img.shape[1]
     
-    
+    #Creates a new key array
     key = np.zeros([row,col], dtype=np.uint8)
+    #creates the n0, n1, ...nx to make the series work
     num = seed
     
     for r in range(row):
         for c in range(col):
             num = ((1103515245*num) + seed)%(2**31)
+            #loads the seed values into the array
             key[r][c] = num
             
     return key

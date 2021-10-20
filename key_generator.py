@@ -9,11 +9,14 @@ def key_generator(img, key_str):
     len_key_str = len(key_str)
     
     img = ia.image_test(img) #plt.imread(img)[:,:,:3]
+    #gets the dimensions of the image
     row = img.shape[0]
     col = img.shape[1]
     
+    #creates hte new array
     key_array = np.zeros([row, col], dtype=np.uint8)
     
+    #loads the key values into the key array
     for r in range(row):
         for c in range(col):
             key_array[r][c] = ((r*c)%len_key_str)

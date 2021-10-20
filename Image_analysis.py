@@ -25,11 +25,6 @@ def image_tester(img):
         image = plt.imread(img)
     elif img.endswith('.png'):
         image = plt.imread(img)
-        # mn = image.min()
-        # mx = image.max()
-        # mx -= mn
-        
-        # image = ((image-mn)/mx)*255
         image = image.astype(np.uint8)
     elif img.endswith('.tiff'):
         image = plt.imread(img)[:,:,:3]

@@ -6,7 +6,7 @@ import key_generator as kg
 import Image_analysis as ia
 
 def histogram(image):
-    image = ia.image_tester(image)
+    #image = ia.image_tester(image)
     image=(image*255).astype(np.uint8)
 
     
@@ -59,9 +59,9 @@ def pseudo_number_key(image, phrase):
     seed = len_phrase*12345
     
     #loads the image dim
-    img = ia.image_tester(image)
-    row = img.shape[0]
-    col = img.shape[1]
+    #img = ia.image_tester(image)
+    row = image.shape[0]
+    col = image.shape[1]
     
     #Creates a new key array
     key = np.zeros([row,col], dtype=np.uint8)
@@ -90,20 +90,20 @@ def test():
     
     
     #image = 'try_this_image.tiff'
-    image = 'image.tiff'
+    image = ia.image_tester('image.tiff')
     #nKey = better_key(image, 'Test')
     nKey = pseudo_number_key(image, 'Test')
     pic = kg.XOR_Cypher(image, nKey)
     plt.imsave('encrypt.tiff', pic)
-    pic = plt.imread('encrypt.tiff')[:,:,:3]
+    pic = ia.image_tester('encrypt.tiff')
     histogram(pic)
 
     
 
-    encrypted = 'encrypt.tiff'
+    #encrypted = 'encrypt.tiff'
     #nKey = better_key(encrypted, 'Test')
-    nKey = pseudo_number_key(encrypted, 'Test')
-    image2 = kg.XOR_Cypher(encrypted, nKey)
+    nKey = pseudo_number_key(pic, 'Test')
+    image2 = kg.XOR_Cypher(pic, nKey)
     plt.imsave('orgin.tiff', image2)
     #histogram(image2)
     

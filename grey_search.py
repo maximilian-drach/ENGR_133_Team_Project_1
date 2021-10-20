@@ -37,12 +37,12 @@ def earth_finder(grey_image):
     return cordinates[0]
     
 
-def earth_image(grey_image):
+def earth_image(sharpened_image, orginal_image):
     #gets the location
-    location = earth_finder(grey_image)
+    location = earth_finder(sharpened_image)
     
     #it take the location and get the row-50 to row+50 and the same for the column with the color values the same
-    grey_image = ia.image_tester(grey_image)
+    grey_image = ia.image_tester(orginal_image)
     
     #gets the 101x101 image by take the place 0,0 as the location of the earth from the last fuction earth_finder
     #then is takes the 50 pixels, in front, above, behind and below it
@@ -50,15 +50,19 @@ def earth_image(grey_image):
 
     return earth
 
-def image_smoother(image):
+def image_blur(image):
     image = ia.image_tester(image)
-    #using the guassian filter,  blurred the image
+    #using the guassian filter, blurres the image
     blurred1 = scipy.ndimage.gaussian_filter(image, sigma=2.5)
+
+    return blurred1
+    
+def image_smoother(blurred_image):
     
     #gets the gradient of the blurred image in the x-direction
-    sx = scipy.ndimage.sobel(blurred1, axis=0, output=None, mode ='constant', cval=0.0)
+    sx = scipy.ndimage.sobel(blurred_image, axis=0, output=None, mode ='constant', cval=0.0)
     #gets the gradient of the blurred image in the y-direction
-    sy = scipy.ndimage.sobel(blurred1, axis=1, output=None, mode ='constant', cval=0.0)
+    sy = scipy.ndimage.sobel(blurred_image, axis=1, output=None, mode ='constant', cval=0.0)
     #hypot get the hypotenuse, or ie sqrt(a^2 + b^2) = C, this is get the gradient edge decetection
     #ie this combine the vertical and horizontal edges
     sob = np.hypot(sx, sy)

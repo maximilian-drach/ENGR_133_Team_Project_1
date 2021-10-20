@@ -8,18 +8,35 @@ def img_input():
     img = input('Enter image file name: ')
     return img
 
+def image_valid(img):
+    if img.endswith('.jpg'):
+        image = True
+    elif img.endswith('.png'):
+        image = True
+    elif img.endswith('.tiff'):
+        image = True
+    else:
+        image = False
+ 
+    return image
+
 def image_tester(img):
     #test the ending of the image file input 
     #then reads the file in correctly depending on the ending
     if img.endswith('.jpg'):
         image = plt.imread(img)
+        
     elif img.endswith('.png'):
-            image = plt.imread(img)
-            image = (image*225).astype(np.unit8)
+        image = plt.imread(img)
+        # mn = image.min()
+        # mx = image.max()
+        # mx -= mn
+        
+        # image = ((image-mn)/mx)*255
+        # image = image.astype(np.uint8)
+        image = (image*225).astype(np.uint8)
     elif img.endswith('.tiff'):
         image = plt.imread(img)[:,:,:3]
-    else:
-        image = False
  
     return image
    
@@ -207,16 +224,19 @@ def pseudo_number_key(image, phrase):
 
 def main():
     image = input('Enter your image: ')
+    if image_valid(image) == False:
+        raise ValueError('This is not a valid image, please use a .tiff, .jpg, .png')
+    
     out_image = input('Enter your output image file (as a .tiff): ')
-    encrypt = bool(input('Is this an image encryption? enter(True or False): '))
-    if encrypt == True:
-        phrase = input('Enter your encryption phrase: ')
-    else:
-        phrase = input('Enter your decryption phrase: ')
+    if image_valid(out_image) == False:
+        raise ValueError('This is not a valid image, please use a .tiff, .jpg, .png')
+    
+    phrase = input('Enter your phrase: ')
     
     
-    
-
+    key = pseudo_number_key(image, phrase)
+    image = XOR_Cypher(image, key)
+    plt.imsave(out_image, image)
     
 
 if __name__ == '__main__':

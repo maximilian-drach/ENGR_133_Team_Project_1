@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy
-
+import Image_analysis as ia
 def grey(image):
-
+    image = ia.image_tester(image)
     grey_values = (image[:,:,0]*.299 + image[:,:,1]*.587 + image[:,:,2]*.114)
     grey = image.copy()
     for i in range(3):
@@ -14,7 +14,8 @@ def grey(image):
 
 def earth_finder(grey_image):
     #makes sure the border exception is taken out
-    grey_image = grey_image[1:,:,:]
+    grey_image = ia.image_tester(grey_image)
+    grey_image = grey_image[1:,1:,:]
     #gets the brighest spot on the image
     brightest_spot = np.amax(grey_image)
     #print(brightest_spot)
@@ -28,13 +29,19 @@ def earth_finder(grey_image):
     return cordinates[0]
     
 
-def earth_image(grey_image, location):
+def earth_image(grey_image):
+    #gets the location
+    location = earth_finder(grey_image)
+    
     #it take the location and get the row-50 to row+50 and the same for the column with the color values the same
+    grey_image = ia.image_tester(grey_image)
+    
     earth = grey_image[location[0]-50:location[0]+51, location[1]-50:location[1]+51,:]
 
     return earth
 
 def image_smoother(image):
+    image = ia.image_tester(image)
     #using the guassian filter,  blurred the image
     blurred1 = scipy.ndimage.gaussian_filter(image, sigma=2.5)
     
@@ -49,6 +56,7 @@ def float64_uint8(img):
     #img_data_max = np.iinfo(img.dtype).max()
     #print(img_data_max)
     #img = img.astype(np.float64)/img_data_max
+    img = ia.image_tester(img)
     img = 255*img
     img = img.astype(np.uint8)
 
@@ -57,6 +65,7 @@ def float64_uint8(img):
 
 def uint8_float64(img):
     #img_data_max = np.iinfo(img.dtype).max
+    img = ia.image_tester(img)
     img = img/255
     img = img.astype(np.float64)
 

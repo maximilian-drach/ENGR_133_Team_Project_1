@@ -3,9 +3,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import key_generator as kg
+import Image_analysis as ia
 
 def histogram(image):
-    
+    image = ia.image_tester(image)
     image=(image*255).astype(np.uint8)
 
     
@@ -50,13 +51,13 @@ def histogram(image):
 
 
     
-def use_key(image, phrase):
+def pseudo_number_key(image, phrase):
     phrase = phrase.replace(' ', '')
     len_phrase = len(phrase)
     
     seed = len_phrase*12345
     
-    img = plt.imread(image)[:,:,:3]
+    img = ia.image_tester(image)
     row = img.shape[0]
     col = img.shape[1]
     
@@ -84,11 +85,10 @@ def test():
     #     phrase = input('Enter your decryption phrase: '))
     
     
-    
     #image = 'try_this_image.tiff'
     image = 'image.tiff'
     #nKey = better_key(image, 'Test')
-    nKey = use_key(image, 'Test')
+    nKey = pseudo_number_key(image, 'Test')
     pic = kg.XOR_Cypher(image, nKey)
     plt.imsave('encrypt.tiff', pic)
     pic = plt.imread('encrypt.tiff')[:,:,:3]
@@ -98,7 +98,7 @@ def test():
 
     encrypted = 'encrypt.tiff'
     #nKey = better_key(encrypted, 'Test')
-    nKey = use_key(encrypted, 'Test')
+    nKey = pseudo_number_key(encrypted, 'Test')
     image2 = kg.XOR_Cypher(encrypted, nKey)
     plt.imsave('orgin.tiff', image2)
     #histogram(image2)

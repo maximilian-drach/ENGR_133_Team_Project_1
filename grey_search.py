@@ -2,9 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy
 import Image_analysis as ia
+from scipy import ndimage
 def grey(image):
     
-    image = ia.image_tester(image)
+    #image = ia.image_tester(image)
     #uses matrix multiplication on the rgb values of the photo
     grey_values = (image[:,:,0]*.299 + image[:,:,1]*.587 + image[:,:,2]*.114)
     #this automatically gets the dim from the image, by just coppying
@@ -19,7 +20,7 @@ def grey(image):
 
 def earth_finder(grey_image):
     #reads the string
-    grey_image = ia.image_tester(grey_image)
+    #grey_image = ia.image_tester(grey_image)
     
     #makes sure the border exception is taken out
     grey_image = grey_image[1:,1:,:]
@@ -42,7 +43,7 @@ def earth_image(sharpened_image, orginal_image):
     location = earth_finder(sharpened_image)
     
     #it take the location and get the row-50 to row+50 and the same for the column with the color values the same
-    grey_image = ia.image_tester(orginal_image)
+    grey_image = orginal_image
     
     #gets the 101x101 image by take the place 0,0 as the location of the earth from the last fuction earth_finder
     #then is takes the 50 pixels, in front, above, behind and below it
@@ -51,7 +52,9 @@ def earth_image(sharpened_image, orginal_image):
     return earth
 
 def image_blur(image):
-    image = ia.image_tester(image)
+    
+    image = uint8_float64(image)
+    #image = ia.image_tester(image)
     #using the guassian filter, blurres the image
     blurred1 = scipy.ndimage.gaussian_filter(image, sigma=2.5)
 
@@ -60,12 +63,15 @@ def image_blur(image):
 def image_smoother(blurred_image):
     
     #gets the gradient of the blurred image in the x-direction
-    sx = scipy.ndimage.sobel(blurred_image, axis=0, output=None, mode ='constant', cval=0.0)
+    sx = ndimage.sobel(blurred_image, axis=0, output=None, mode ='constant', cval=0.0)
     #gets the gradient of the blurred image in the y-direction
-    sy = scipy.ndimage.sobel(blurred_image, axis=1, output=None, mode ='constant', cval=0.0)
+    sy = ndimage.sobel(blurred_image, axis=1, output=None, mode ='constant', cval=0.0)
     #hypot get the hypotenuse, or ie sqrt(a^2 + b^2) = C, this is get the gradient edge decetection
     #ie this combine the vertical and horizontal edges
     sob = np.hypot(sx, sy)
+    
+    sob = float64_uint8(sob)
+    sob = grey(sob)
     
     return sob
 
@@ -74,7 +80,7 @@ def float64_uint8(img):
     #img_data_max = np.iinfo(img.dtype).max()
     #print(img_data_max)
     #img = img.astype(np.float64)/img_data_max
-    img = ia.image_tester(img)
+    #img = ia.image_tester(img)
     #times the image rgb value by 255 to get the unit8
     img = 255*img
     img = img.astype(np.uint8)
@@ -84,7 +90,7 @@ def float64_uint8(img):
 
 def uint8_float64(img):
     #img_data_max = np.iinfo(img.dtype).max
-    img = ia.image_tester(img)
+    #img = ia.image_tester(img)
     #dives the unint8 values to the get the 0-1 float64 values
     img = img/255
     img = img.astype(np.float64)
@@ -93,25 +99,41 @@ def uint8_float64(img):
 
 
 def test():
-    image = plt.imread('image.tiff')[:,:,:3]
-    #image = plt.imread('img_plain0.tiff')[:,:,:3]
-    image = grey(image)
-    plt.imsave('gray.tiff', image)
-    
-    image2 = uint8_float64(image)
-    image2 = image_smoother(image2)
-    image2 = float64_uint8(image2)
-    image_grey = grey(image2)
-    plt.imsave('grey_sharpned.tiff', image_grey)
+     image = ia.image_tester('image.tiff')
+     gray = grey(image)
      
-    earth_location = earth_finder(image_grey)
-    # print(earth_location)
+     i1 = image_blur(gray)
+     plt.imsave('blur.tiff', i1)
+     
+     #i2 = uint8_float64(i1)
+     i2 = image_smoother(i1)
+     #i2 = float64_uint8(i2)
+     plt.imsave('sharp.tiff', i2)
+     
+     
+     
+     e = earth_image(i2, image)
+     plt.imsave('earth.tiff', e)
+     
+    # #image = plt.imread('img_plain0.tiff')[:,:,:3]
+    # image = grey(image)
+    # plt.imsave('gray.tiff', image)
     
-    earth = earth_image(image, earth_location)
-    plt.imsave('earth.tiff', earth)
+    # image2 = uint8_float64(image)
+    # image2 = 
+    # image2 = image_smoother(image2)
+    # image2 = float64_uint8(image2)
+    # image_grey = grey(image2)
+    # plt.imsave('grey_sharpned.tiff', image_grey)
+     
+    # #earth_location = earth_finder(image_grey)
+    # # print(earth_location)
+    
+    # earth = earth_image(,image)
+    # plt.imsave('earth.tiff', earth)
  
 def main():
-    pass
+    test()
 
 if __name__ == '__main__':
     main()

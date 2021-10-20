@@ -6,19 +6,34 @@ def img_input():
     img = input('Enter image file name: ')
     return img
 
+def image_valid(img):
+    if img.endswith('.jpg'):
+        image = True
+    elif img.endswith('.png'):
+        image = True
+    elif img.endswith('.tiff'):
+        image = True
+    else:
+        image = False
+ 
+    return image
+
 def image_tester(img):
     #test the ending of the image file input 
     #then reads the file in correctly depending on the ending
     if img.endswith('.jpg'):
         image = plt.imread(img)
     elif img.endswith('.png'):
-            image = plt.imread(img)
-            image = (image*225).astype(np.unit8)
+        image = plt.imread(img)
+        # mn = image.min()
+        # mx = image.max()
+        # mx -= mn
+        
+        # image = ((image-mn)/mx)*255
+        image = image.astype(np.uint8)
     elif img.endswith('.tiff'):
         image = plt.imread(img)[:,:,:3]
-    else:
-        image = False
- 
+        
     return image
    
 

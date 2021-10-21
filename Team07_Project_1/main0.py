@@ -225,7 +225,9 @@ def encryption_test():
     image = image_tester(image)
     histogram(image)
     key = pseudo_number_key(image, phrase)
-    out_image = XOR_Cypher(image, key)
+    print(key)
+    out_image = encryption_image(image, phrase)
+    #out_image = XOR_Cypher(image, key)
     plt.imsave(out_image, out_image)
     histogram(out_image)
     
@@ -253,7 +255,8 @@ def Oringal_Key_Encryption():
     
 
     key = key_generator(img, phrase)
-    pic = XOR_Cypher(img, key)
+    #pic = XOR_Cypher(img, key)
+    pic = encryption_image(img, phrase)
     plt.imsave("image.tiff", pic)
     
 def main():

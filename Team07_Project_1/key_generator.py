@@ -25,6 +25,7 @@ def key_generator(img, key_str):
 
     return Key
 def XOR_Cypher(Img, Key):
+    
     #reads the image
     #Img = ia.image_tester(Img) #plt.imread(Img)[:,:,:3]
 
@@ -46,7 +47,6 @@ def XOR_Cypher(Img, Key):
       #         #Key[row][col] = bin(Key[row][col])
       #         #Img[row][col] = bin(Img[row][col])
       #         Img[r][c] = Key[r][c] ^ Img[r][c]
-
 
 
 def test():

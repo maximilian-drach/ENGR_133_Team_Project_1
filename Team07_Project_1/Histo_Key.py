@@ -73,7 +73,10 @@ def pseudo_number_key(image, phrase):
             
     return key
     
-    
+def encrytion_image(image, phrase):
+    key = pseudo_number_key(image, phrase)
+    image = kg.XOR_Cypher(image, key)
+    return image
 
 
 def test():

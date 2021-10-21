@@ -61,6 +61,7 @@ def image_blur(image):
     
 def edge_dectector(blurred_image):
     
+    #no need for th absolute value since the both the x and y compnenet gonna be squared
     #gets the gradient of the blurred image in the x-direction
     sx = ndimage.sobel(blurred_image, axis=0, output=None, mode ='constant', cval=0.0)
     #gets the gradient of the blurred image in the y-direction

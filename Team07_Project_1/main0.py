@@ -132,6 +132,7 @@ def image_blur(image):
     
 def edge_dectector(blurred_image):
     
+    #no need for th absolute value since the both the x and y compnenet gonna be squared
     #gets the gradient of the blurred image in the x-direction
     sx = ndimage.sobel(blurred_image, axis=0, output=None, mode ='constant', cval=0.0)
     #gets the gradient of the blurred image in the y-direction
@@ -205,7 +206,11 @@ def pseudo_number_key(image, phrase):
             key[r][c] = num
             
     return key
-    
+def encryption_image(image, phrase):
+    key = pseudo_number_key(image, phrase)
+    image = XOR_Cypher(image, key)
+    return image
+ 
 def encryption_test():
     image = input('Enter your image: ')
     if image_valid(image) == False:

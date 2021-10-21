@@ -43,11 +43,11 @@ def earth_image(sharpened_image, orginal_image):
     location = earth_finder(sharpened_image)
     
     #it take the location and get the row-50 to row+50 and the same for the column with the color values the same
-    grey_image = orginal_image
+   
     
     #gets the 101x101 image by take the place 0,0 as the location of the earth from the last fuction earth_finder
     #then is takes the 50 pixels, in front, above, behind and below it
-    earth = grey_image[location[0]-50:location[0]+51, location[1]-50:location[1]+51,:]
+    earth = orginal_image[location[0]-50:location[0]+51, location[1]-50:location[1]+51,:]
 
     return earth
 

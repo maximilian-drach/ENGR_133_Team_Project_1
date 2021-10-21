@@ -249,14 +249,16 @@ def earth_test():
     plt.imsave('earth.tiff', earth)
 
 def Oringal_Key_Encryption():
-    phrase = 'COME AND GET YOUR LOVE'
-    img = 'Pale_Blue_Dot_Encrypted.tiff'
+    phrase = input('Enter the phrase "COME AND GET YOUR LOVE": ')
+    img = input('Enter "Pale_Blue_Dot_Encrypted.tiff": ')
+    #phrase = 'COME AND GET YOUR LOVE'
+    #img = 'Pale_Blue_Dot_Encrypted.tiff'
     img = image_tester(img)
     
 
     key = key_generator(img, phrase)
     pic = XOR_Cypher(img, key)
-    #pic = encryption_image(img, phrase)
+    
     plt.imsave("image.tiff", pic)
     
 def main():

@@ -256,7 +256,7 @@ def Oringal_Key_Encryption():
 
     key = key_generator(img, phrase)
     pic = XOR_Cypher(img, key)
-    pic = encryption_image(img, phrase)
+    #pic = encryption_image(img, phrase)
     plt.imsave("image.tiff", pic)
     
 def main():

@@ -3,7 +3,7 @@
 ENGR 13300 Fall 2021
 
 Program Description
-    The main function that brings together all the user functions in the project to demo encrypting and decrypting an image.
+    demonstraits all the code and functions
 
 Assignment Information
     Assignment:     Group Project
@@ -32,6 +32,7 @@ access to my code to another. The project I am submitting
 is my own original work.
 ===============================================================================
 """
+
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -284,20 +285,22 @@ def earth_test():
     plt.imsave('earth.tiff', earth)
 
 def Oringal_Key_Encryption():
-    phrase = 'COME AND GET YOUR LOVE'
-    img = 'Pale_Blue_Dot_Encrypted.tiff'
+    phrase = input('Enter the phrase "COME AND GET YOUR LOVE": ')
+    img = input('Enter "Pale_Blue_Dot_Encrypted.tiff": ')
+    #phrase = 'COME AND GET YOUR LOVE'
+    #img = 'Pale_Blue_Dot_Encrypted.tiff'
     img = image_tester(img)
     
 
     key = key_generator(img, phrase)
     pic = XOR_Cypher(img, key)
-    #pic = encryption_image(img, phrase)
+    
     plt.imsave("image.tiff", pic)
     
 def main():
     Oringal_Key_Encryption()
     earth_test()
-    encryption_test()
+    #encryption_test()
     
 
 if __name__ == '__main__':

@@ -14,12 +14,9 @@ def histogram(image):
     plt.hist(image[:,:,1].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='green', alpha=.1, label='Green Pixels')
     plt.hist(image[:,:,2].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='blue', alpha=.1, label='Blue Pixels')
     plt.legend()
-    
-    return plt.legend
-   
+    plt.show()
     
     
- 
 
 # #dont use this key, its not as good at encrypting
 # def better_key(image, phrase):
@@ -90,13 +87,13 @@ def test():
     
     
     #image = 'try_this_image.tiff'
-    image = ia.image_tester('img_plain3.tiff')
+    image = ia.image_tester('image.tiff')
     #nKey = better_key(image, 'Test')
     nKey = pseudo_number_key(image, 'Test')
     encrypted_image = kg.XOR_Cypher(image, nKey)
     plt.imsave('encrypt.tiff', encrypted_image)
     pic = ia.image_tester('encrypt.tiff')
-    #histogram(pic)
+    histogram(pic)
 
     
 

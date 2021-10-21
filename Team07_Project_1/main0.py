@@ -177,8 +177,8 @@ def histogram(image):
     plt.hist(image[:,:,1].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='green', alpha=.1, label='Green Pixels')
     plt.hist(image[:,:,2].reshape(image.shape[0]*image.shape[1]),bins=np.arange(2**8+1), color='blue', alpha=.1, label='Blue Pixels')
     plt.legend()
+    plt.show()
     
-    return plt.legend
     
     
 def pseudo_number_key(image, phrase):
@@ -217,10 +217,13 @@ def encryption_test():
     
     phrase = input('Enter your phrase: ')
     
-    
+    image = image_tester(image)
+    histogram(image)
     key = pseudo_number_key(image, phrase)
-    image = XOR_Cypher(image, key)
-    plt.imsave(out_image, image)
+    out_image = XOR_Cypher(image, key)
+    plt.imsave(out_image, out_image)
+    histogram(out_image)
+    
     
 def earth_test():
     image = image_tester('image.tiff')
